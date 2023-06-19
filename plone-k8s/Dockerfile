@@ -1,4 +1,4 @@
-FROM plone/plone-backend:6.0
+FROM docker.io/plone/plone-backend:6.0
 
-RUN chown -R g=u /app /data
+RUN chmod -R g=u /app /data
 
