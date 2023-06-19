@@ -19,3 +19,8 @@ configMapGenerator:
 
 generatorOptions:
   disableNameSuffixHash: true
+
+images:
+- name: plone:latest
+  newName: default-route-openshift-image-registry.apps.mirkwood.pfpk.pro/develop/plone-k8s
+  newTag: latest

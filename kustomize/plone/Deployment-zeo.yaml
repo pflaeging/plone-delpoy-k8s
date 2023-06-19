@@ -17,7 +17,7 @@ spec:
         pflaeging.net/deployment: zeo
     spec:
       containers:
-      - image: plone/plone-zeo:latest
+      - image: plone:latest
         resources: {}
         imagePullPolicy: Always
         name: plone-zeo

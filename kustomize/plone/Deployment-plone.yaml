@@ -17,7 +17,7 @@ spec:
         pflaeging.net/deployment: plone
     spec:
       containers:
-      - image: plone/plone-backend:6
+      - image: plone:latest
         imagePullPolicy: Always
         name: plone
         env:
