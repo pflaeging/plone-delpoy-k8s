@@ -1,9 +1,9 @@
 kind: BuildConfig
 apiVersion: build.openshift.io/v1
 metadata:
-  name: wordpress-container
+  name: plone-k8s
   labels:
-    app: wordpress-container
+    app: plone-k8s
 spec:
   resources:
     requests:
@@ -15,7 +15,7 @@ spec:
   output:
     to:
       kind: ImageStreamTag
-      name: 'wordpress-container:latest'
+      name: 'plone-k8s:latest'
   successfulBuildsHistoryLimit: 5
   failedBuildsHistoryLimit: 5
   strategy:
@@ -26,11 +26,9 @@ spec:
   source:
     type: Git
     git:
-      uri: https://gitlab.pflaeging.net/pflaeging-net-public/wordpress-okd.git
-      ref: master
-    contextDir: /wordpress-container
-    sourceSecret:
-      name: read-repo
+      uri: https://github.com/pflaeging/plone-delpoy-k8s.git
+      ref: main
+    contextDir: /plone-k8s
   triggers:
     - type: ConfigChange
   runPolicy: Serial

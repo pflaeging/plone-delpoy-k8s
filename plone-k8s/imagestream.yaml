@@ -2,5 +2,5 @@ apiVersion: image.openshift.io/v1
 kind: ImageStream
 metadata:
   labels:
-    app: wordpress-container
-  name: wordpress-container
+    app: plone-k8s
+  name: plone-k8s
