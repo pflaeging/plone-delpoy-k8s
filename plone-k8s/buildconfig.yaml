@@ -1,0 +1,36 @@
+kind: BuildConfig
+apiVersion: build.openshift.io/v1
+metadata:
+  name: wordpress-container
+  labels:
+    app: wordpress-container
+spec:
+  resources:
+    requests:
+      cpu: "500m"
+      memory: "500Mi"
+    limits:
+      cpu: "700m"
+      memory: "768Mi"
+  output:
+    to:
+      kind: ImageStreamTag
+      name: 'wordpress-container:latest'
+  successfulBuildsHistoryLimit: 5
+  failedBuildsHistoryLimit: 5
+  strategy:
+    type: Docker
+    dockerStrategy:
+      dockerfilePath: Dockerfile
+  postCommit: {}
+  source:
+    type: Git
+    git:
+      uri: https://gitlab.pflaeging.net/pflaeging-net-public/wordpress-okd.git
+      ref: master
+    contextDir: /wordpress-container
+    sourceSecret:
+      name: read-repo
+  triggers:
+    - type: ConfigChange
+  runPolicy: Serial

@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx
+  labels:
+    pflaeging.net/deployment: nginx
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      pflaeging.net/deployment: nginx
+  template:
+    metadata:
+      labels:
+        pflaeging.net/deployment: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: nginxinc/nginx-unprivileged:stable
+        volumeMounts:
+          - name: nginx
+            mountPath: "/etc/nginx/conf.d/nginx-revproxy.conf"
+            subPath: nginx-revproxy.conf
+            readOnly: true
+        ports:
+        - containerPort: 8081
+        resources: {}
+      volumes:
+        - name: nginx
+          configMap:
+            name: nginx

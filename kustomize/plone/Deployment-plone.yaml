@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: plone
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 2
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      pflaeging.net/deployment: plone
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        pflaeging.net/deployment: plone
+    spec:
+      containers:
+      - image: plone/plone-backend:6
+        imagePullPolicy: Always
+        name: plone
+        env:
+        - name: ZEO_ADDRESS
+          value: 'zeo:8080'
+        - name: SITE
+          value: 'Plone'
+        - name: TYPE
+          value: 'classic'
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        resources: {}
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+status: {}
