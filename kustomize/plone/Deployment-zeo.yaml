@@ -17,11 +17,10 @@ spec:
         pflaeging.net/deployment: zeo
     spec:
       containers:
-      - image: plone:latest
+      - image: docker.io/plone/plone-zeo:latest
         resources: {}
         imagePullPolicy: Always
         name: plone-zeo
-        args: ['/app/start-zeo.sh']
         terminationMessagePath: /dev/termination-log
         terminationMessagePolicy: File
         volumeMounts:
